@@ -8,6 +8,8 @@ stocks_2 <-
     get = "stock.prices"
   ) %>%
   dplyr::select(date, series = symbol, value = adjusted) %>%
-  dplyr::group_by(series)
+  dplyr::group_by(series) %>%
+  tidyr::pivot_wider(names_from = series, values_from = value)
+
 
 usethis::use_data(stocks_2, overwrite = TRUE)
