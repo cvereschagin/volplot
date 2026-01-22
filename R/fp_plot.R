@@ -24,7 +24,7 @@ fp_plot <- function(data) {
     dplyr::group_by(.data[[group_col]]) %>%
     dplyr::arrange(.data[[x_col]], .by_group = TRUE) %>%
     dplyr::mutate(
-      log_returns = log(.data[[val_col]] / stats::lag(.data[[val_col]])),
+      log_returns = log(.data[[val_col]] / dplyr::lag(.data[[val_col]])),
       cum_ret = cumsum(dplyr::coalesce(.data$log_returns, 0))
     ) %>%
     dplyr::ungroup() %>%
